@@ -23,8 +23,8 @@ app.get("/", (req, res) => {
 
 
 app.post("/add", checkDataType, (req, res) => {
-    let num1 = req.body.num1;
-    let num2 = req.body.num2;
+  let num1 = req.body.num1;
+  let num2 = req.body.num2;
   let result = num1 + num2;
 
   res.status(200).json({
@@ -36,7 +36,9 @@ app.post("/add", checkDataType, (req, res) => {
 })
 
 app.post("/sub", checkDataType, (req, res) => {
-
+  let num1 = req.body.num1;
+  let num2 = req.body.num2;
+  
   let result = num1 - num2;
 
   return res.status(200).json({
