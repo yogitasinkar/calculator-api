@@ -3,7 +3,7 @@ module.exports = (req, res, next) => {
     let num2 = req.body.num2;
 
     if (typeof num1 === "string" || typeof num2 === "string") {
-        res.status(400).json({
+        res.json({
           status: "failure",
           message: "invalid data types",
           sum: ""
@@ -11,9 +11,22 @@ module.exports = (req, res, next) => {
         return 
     }
 
-    if (req.url === "/add" || req.url === "/multiply") {
-      if (num1 > 1000000 || num2 > 1000000) {
-        res.status(400).json({
+    if (req.url === "/add") {
+      let result = num1+num2;
+      if (num1 > 1000000 || num2 > 1000000 || result > 1000000) {
+        res.json({
+          status: "error",
+          message: "Overflow",
+          sum: "",
+        });
+        return;
+      }
+    }
+
+    if (req.url === "/multiply") {
+      let result = num1 * num2;
+      if (num1 > 1000000 || num2 > 1000000 || result > 1000000) {
+        res.json({
           status: "error",
           message: "Overflow",
           sum: "",
@@ -24,13 +37,23 @@ module.exports = (req, res, next) => {
 
     if(req.url === "/sub"){
         if (num1 < 1000000 || num2 < 1000000) {
-            res.status(400).json({
+            res.json({
                 status: "error",
                 message: "Underflow",
                 sum: "",
             });
             return;
         }
+    }
+
+    if (req.url === "/division") {
+      if (num2 === 0) {
+        return res.json({
+          status: "failure",
+          message: "Cannot divide by zero",
+          sum: "",
+        });
+      }
     }
 
     
