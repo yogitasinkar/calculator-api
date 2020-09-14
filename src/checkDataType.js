@@ -10,14 +10,29 @@ module.exports = (req, res, next) => {
         });
         return 
     }
-    if (num1 > 1000000 || num2 > 1000000) {
+
+    if (req.url === "/add" || req.url === "/multiply") {
+      if (num1 > 1000000 || num2 > 1000000) {
         res.status(400).json({
           status: "error",
           message: "Overflow",
           sum: "",
         });
         return;
+      }
     }
+
+    if(req.url === "/sub"){
+        if (num1 < 1000000 || num2 < 1000000) {
+            res.status(400).json({
+                status: "error",
+                message: "Underflow",
+                sum: "",
+            });
+            return;
+        }
+    }
+
     
     next()
 } 
