@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const bodyParser = require("body-parser");
+const checkDataType = require("./checkDataType");
+
 const port = 3000
 app.use(express.urlencoded());
 
@@ -14,7 +16,68 @@ app.use(bodyParser.json())
 // your code goes here
 
 // here
+app.get("/", (req, res) => {
+  res.sendStatus(200).send("Hello world!");
+});
 
+
+
+app.post("/add", checkDataType, (req, res) => {
+    let num1 = req.body.num1;
+    let num2 = req.body.num2;
+  let result = num1 + num2;
+
+  res.status(200).json({
+    status: "success",
+    message: "the sum of given two numbers",
+    sum: result,
+  });
+  
+})
+
+app.post("/sub", checkDataType, (req, res) => {
+
+  let result = num1 - num2;
+
+  return res.status(200).json({
+    status: "success",
+    message: "the difference of given two number",
+    sum: result,
+  });
+});
+
+app.post("/multiply",checkDataType, (req, res) => {
+  let num1 = req.body.num1;
+  let num2 = req.body.num2;
+
+  let result = num1 * num2;
+
+  return res.status(200).json({
+    status: "success",
+    message: "The product of given numbers",
+    sum: result,
+  });
+});
+
+app.post("/division", checkDataType, (req, res) => {
+  let num1 = req.body.num1;
+  let num2 = req.body.num2;
+
+  if (num2 === 0) {
+    return res.status(400).json({
+      status: "failure",
+      message: "Cannot divide by zero",
+    });
+  }
+
+  let result = num1 / num2;
+
+  return res.json({
+    status: "success",
+    message: "The division of given numbers",
+    sum: result,
+  });
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
