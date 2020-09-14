@@ -6,7 +6,6 @@ module.exports = (req, res, next) => {
         res.json({
           status: "failure",
           message: "Invalid data types",
-          sum: ""
         });
         return 
     }

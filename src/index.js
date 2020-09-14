@@ -31,7 +31,6 @@ app.post("/add", checkDataType, (req, res) => {
     res.json({
       status: "error",
       message: "Overflow",
-      sum: "",
     });
     return;
   }
@@ -54,7 +53,6 @@ app.post("/sub", checkDataType, (req, res) => {
     res.json({
       status: "error",
       message: "Underflow",
-      sum: "",
     });
     return;
   }
@@ -62,7 +60,7 @@ app.post("/sub", checkDataType, (req, res) => {
   res.json({
     status: "success",
     message: "the difference of given two numbers",
-    sum: result,
+    difference: result,
   });
 });
 
@@ -77,7 +75,6 @@ app.post("/multiply", checkDataType, (req, res) => {
     res.json({
       status: "error",
       message: "Overflow",
-      sum: "",
     });
     return;
   }
@@ -85,7 +82,7 @@ app.post("/multiply", checkDataType, (req, res) => {
   res.json({
     status: "success",
     message: "The product of given numbers",
-    sum: result,
+    result: result,
   });
 });
 
@@ -97,7 +94,6 @@ app.post("/divide", checkDataType, (req, res) => {
     return res.json({
       status: "failure",
       message: "Cannot divide by zero",
-      sum: "",
     });
   }
 
@@ -106,7 +102,7 @@ app.post("/divide", checkDataType, (req, res) => {
   res.json({
     status: "success",
     message: "The division of given numbers",
-    sum: result,
+    result: result,
   });
 
 });
