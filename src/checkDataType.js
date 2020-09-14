@@ -4,15 +4,17 @@ module.exports = (req, res, next) => {
 
     if (typeof num1 === "string" || typeof num2 === "string") {
         res.status(400).json({
-          status: "error",
-          message: "Invalid data types",
+          status: "failure",
+          message: "invalid data types",
+          sum: ""
         });
         return 
     }
     if (num1 > 1000000 || num2 > 1000000) {
         res.status(400).json({
-          status: "failure",
+          status: "error",
           message: "Overflow",
+          sum: "",
         });
         return;
     }

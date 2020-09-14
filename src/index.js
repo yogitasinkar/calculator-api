@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 
 // here
 app.get("/", (req, res) => {
-  res.sendStatus(200).send("Hello world!");
+  res.status(200).send("Hello world!");
 });
 
 
@@ -29,7 +29,7 @@ app.post("/add", checkDataType, (req, res) => {
 
   res.status(200).json({
     status: "success",
-    message: "the sum of given two numbers",
+    message: "the sum of given two number",
     sum: result,
   });
   
@@ -67,6 +67,7 @@ app.post("/division", checkDataType, (req, res) => {
     return res.status(400).json({
       status: "failure",
       message: "Cannot divide by zero",
+      sum: ""
     });
   }
 
