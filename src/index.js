@@ -27,6 +27,15 @@ app.post("/add", checkDataType, (req, res) => {
   let num2 = req.body.num2;
   let result = num1 + num2;
 
+  if (num1 > 1000000 || num2 > 1000000 || result > 1000000) {
+    res.json({
+      status: "error",
+      message: "Overflow",
+      sum: "",
+    });
+    return;
+  }
+
   res.json({
     status: "success",
     message: "the sum of given two numbers",
@@ -41,37 +50,65 @@ app.post("/sub", checkDataType, (req, res) => {
 
   let result = num1 - num2;
 
-  return res.json({
+  if (result < -1000000) {
+    res.json({
+      status: "error",
+      message: "Underflow",
+      sum: "",
+    });
+    return;
+  }
+
+  res.json({
     status: "success",
     message: "the difference of given two numbers",
     sum: result,
   });
 });
 
-app.post("/multiply",checkDataType, (req, res) => {
+
+app.post("/multiply", checkDataType, (req, res) => {
   let num1 = req.body.num1;
   let num2 = req.body.num2;
 
   let result = num1 * num2;
 
-  return res.json({
+  if (result > 1000000) {
+    res.json({
+      status: "error",
+      message: "Overflow",
+      sum: "",
+    });
+    return;
+  }
+
+  res.json({
     status: "success",
     message: "The product of given numbers",
     sum: result,
   });
 });
 
-app.post("/division", checkDataType, (req, res) => {
+app.post("/divide", checkDataType, (req, res) => {
   let num1 = req.body.num1;
   let num2 = req.body.num2;
 
+  if (num2 === 0) {
+    return res.json({
+      status: "failure",
+      message: "Cannot divide by zero",
+      sum: "",
+    });
+  }
+
   let result = num1 / num2;
 
-  return res.json({
+  res.json({
     status: "success",
     message: "The division of given numbers",
     sum: result,
   });
+
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
